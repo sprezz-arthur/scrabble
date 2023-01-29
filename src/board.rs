@@ -10,7 +10,19 @@ use std::fmt::{self, Display};
 
 impl Display for Board {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        for row in self.0.iter() {
+
+        write!(f, "  ")?;
+        write!(f, "{}", "\x1b[58;5;30m")?;
+        write!(f, "{}", "\x1b[1;4;30m")?;
+        writeln!(f, " 0  1  2  3  4  5  6  7  8  9  A  B  C  D  E ")?;
+        write!(f, "{}", "\x1b[0m")?;
+        for (i, row) in self.0.iter().enumerate() {
+            if i < 10 {
+                write!(f, "{} ", i)?;
+            }
+            else {
+                write!(f, "{} ", (i as u8+ 55) as char)?;
+            }
             writeln!(f, "{}", row.iter().join(""))?;
         }
         return Ok(());
