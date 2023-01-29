@@ -14,16 +14,16 @@ enum Color {
 impl Color {
     pub fn hex_code(&self) -> &str {
         return match &self {
-            Beige => "\x1b[44m",
-            LightBlue => "\x1b[46m",
-            Blue => "\x1b[44m",
-            Salmon => "\x1b[45m",
-            Red => "\x1b[41m",
+            Color::Beige => "\x1b[103m",
+            Color::LightBlue => "\x1b[104m",
+            Color::Blue => "\x1b[48:5:19m",
+            Color::Salmon => "\x1b[101m",
+            Color::Red => "\x1b[48:5:88m",
         };
     }
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub enum Target {
     Word,
     Letter,
@@ -31,40 +31,58 @@ pub enum Target {
 
 #[derive(Copy, Clone, Debug)]
 pub struct CellProps {
+    symbol: char,
     mult: Option<i32>,
     target: Option<Target>,
     color: Color,
 }
 
+#[derive(Copy, Clone, Debug)]
+pub enum CellType {
+    Star,
+    Simple,
+    DoubleLetter,
+    TripleLetter,
+    DoubleWord,
+    TripleWord,
+}
+
+
 impl CellProps {
     pub fn new(cell_type: CellType) -> CellProps {
         return match cell_type {
-            Simple => CellProps {
+            CellType::Simple => CellProps {
+                symbol: ' ',
                 mult: None,
                 target: None,
                 color: Color::Beige,
             },
-            Star => CellProps {
+            CellType::Star => CellProps {
+                symbol: '*',
                 mult: Some(2),
                 target: Some(Target::Word),
                 color: Color::Salmon,
             },
-            DoubleLetter => CellProps {
+            CellType::DoubleLetter => CellProps {
+                symbol: ' ',
                 mult: Some(2),
                 target: Some(Target::Letter),
                 color: Color::LightBlue,
             },
-            TripleLetter => CellProps {
+            CellType::TripleLetter => CellProps {
+                symbol: ' ',
                 mult: Some(3),
                 target: Some(Target::Letter),
                 color: Color::Blue,
             },
-            DoubleWord => CellProps {
+            CellType::DoubleWord => CellProps {
+                symbol: ' ',
                 mult: Some(2),
                 target: Some(Target::Word),
                 color: Color::Salmon,
             },
-            TripleWord => CellProps {
+            CellType::TripleWord => CellProps {
+                symbol: ' ',
                 mult: Some(3),
                 target: Some(Target::Word),
                 color: Color::Red,
@@ -79,15 +97,6 @@ impl CellProps {
     }
 }
 
-#[derive(Copy, Clone, Debug)]
-pub enum CellType {
-    Star,
-    Simple,
-    DoubleLetter,
-    TripleLetter,
-    DoubleWord,
-    TripleWord,
-}
 
 #[derive(Copy, Clone, Debug)]
 pub struct Cell {
@@ -98,7 +107,7 @@ pub struct Cell {
 impl Cell {
     pub fn new(cell_type: CellType) -> Cell {
         let props = CellProps::new(cell_type);
-        return Cell { tile: None, props };
+        return Cell { tile: None, props: props };
     }
 }
 
@@ -111,11 +120,11 @@ impl Default for Cell {
 impl Display for Cell {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let repr = if self.tile.is_none() {
-            " ".to_string()
+            "▏·▕".replace("·", &self.props.symbol.to_string())
         } else {
-            self.tile.unwrap().repr()
+            "▏·▕".replace("·", &self.tile.unwrap().repr())
         };
-
+        write!(f, "{}", "\x1b[1;21;30m")?;
         write!(f, "{}", self.props.color.hex_code())?;
         write!(f, "{}", repr)?;
         write!(f, "{}", "\x1b[0m")?;

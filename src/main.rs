@@ -5,7 +5,7 @@ fn main() {
     println!("This is how my cell looks: {}", cell);
     println!("This is my cell's content: {:?}", cell);
 
-    println!("And after I place an `A` tile, it goes...");
+    println!("\nAnd after I place an `A` tile, it goes...\n");
 
     let tile = board::cell::tile::Tile::new('A', 1);
 
@@ -13,4 +13,8 @@ fn main() {
 
     println!("This is how my cell looks: {}", cell);
     println!("This is my cell's content: {:?}", cell);
+
+
+    let board = board::Board::default();
+    println!("This is my board:\n{}", board);
 }
