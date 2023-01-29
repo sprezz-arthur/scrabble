@@ -8,7 +8,13 @@ use std::fmt::{self, Display};
 
 impl Display for Board {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        todo!();
+        for row in self.0.iter() {
+            for cell in row.iter() {
+                write!(f, "{} ", cell)?;
+            }
+            writeln!(f, "")?;
+        }
+        return Ok(());
     }
 }
 

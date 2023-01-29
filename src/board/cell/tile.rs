@@ -2,8 +2,8 @@ use std::fmt::{self, Display};
 
 #[derive(Copy, Clone)]
 pub struct Tile {
-    letter: char,
-    value: i32,
+    pub letter: char,
+    pub value: i32,
 }
 
 impl Tile {
@@ -14,7 +14,7 @@ impl Tile {
 
 impl Display for Tile {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        todo!();
+        return write!(f, "{}", self.letter);
     }
 }
 

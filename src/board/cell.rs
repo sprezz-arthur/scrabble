@@ -27,7 +27,10 @@ impl Default for Cell {
 
 impl Display for Cell {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        todo!();
+        if self.tile.is_none() {
+            return write!(f, "-");
+        }
+        return write!(f, "{}", self.tile.unwrap());
     }
 }
 
