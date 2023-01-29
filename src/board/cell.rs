@@ -14,7 +14,7 @@ enum Color {
 impl Color {
     pub fn hex_code(&self) -> &str {
         return match &self {
-            Color::Beige => "\x1b[103m",
+            Color::Beige => "\x1b[48:5:228m",
             Color::LightBlue => "\x1b[104m",
             Color::Blue => "\x1b[48:5:19m",
             Color::Salmon => "\x1b[101m",
@@ -124,6 +124,7 @@ impl Display for Cell {
         } else {
             "▏·▕".replace("·", &self.tile.unwrap().repr())
         };
+        write!(f, "{}", "\x1b[58;5;30m")?;
         write!(f, "{}", "\x1b[1;21;30m")?;
         write!(f, "{}", self.props.color.hex_code())?;
         write!(f, "{}", repr)?;
