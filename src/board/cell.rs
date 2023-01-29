@@ -5,10 +5,22 @@ pub mod tile;
 #[derive(Copy, Clone, Debug)]
 enum Color {
     Beige,
-    Pink,
+    Salmon,
     Red,
     Blue,
     LightBlue,
+}
+
+impl Color {
+    pub fn hex_code(&self) -> &str {
+        return match &self {
+            Beige => "\x1b[44m",
+            LightBlue => "\x1b[46m",
+            Blue => "\x1b[44m",
+            Salmon => "\x1b[45m",
+            Red => "\x1b[41m",
+        };
+    }
 }
 
 #[derive(Copy, Clone, Debug)]
@@ -35,29 +47,35 @@ impl CellProps {
             Star => CellProps {
                 mult: Some(2),
                 target: Some(Target::Word),
-                color: Color::Beige,
+                color: Color::Salmon,
             },
             DoubleLetter => CellProps {
                 mult: Some(2),
                 target: Some(Target::Letter),
-                color: Color::Beige,
+                color: Color::LightBlue,
             },
             TripleLetter => CellProps {
                 mult: Some(3),
                 target: Some(Target::Letter),
-                color: Color::Beige,
+                color: Color::Blue,
             },
             DoubleWord => CellProps {
                 mult: Some(2),
                 target: Some(Target::Word),
-                color: Color::Beige,
+                color: Color::Salmon,
             },
             TripleWord => CellProps {
                 mult: Some(3),
                 target: Some(Target::Word),
-                color: Color::Beige,
+                color: Color::Red,
             },
         };
+    }
+}
+
+impl CellProps {
+    pub fn hex_code(&self) -> &str {
+        return self.color.hex_code();
     }
 }
 
@@ -73,7 +91,7 @@ pub enum CellType {
 
 #[derive(Copy, Clone, Debug)]
 pub struct Cell {
-    tile: Option<tile::Tile>,
+    pub tile: Option<tile::Tile>,
     props: CellProps,
 }
 
@@ -92,10 +110,16 @@ impl Default for Cell {
 
 impl Display for Cell {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        if self.tile.is_none() {
-            return write!(f, " ");
-        }
-        return write!(f, "{}", self.tile.unwrap());
+        let repr = if self.tile.is_none() {
+            " ".to_string()
+        } else {
+            self.tile.unwrap().repr()
+        };
+
+        write!(f, "{}", self.props.color.hex_code())?;
+        write!(f, "{}", repr)?;
+        write!(f, "{}", "\x1b[0m")?;
+        return Ok(());
     }
 }
 

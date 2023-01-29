@@ -18,5 +18,11 @@ impl Display for Tile {
     }
 }
 
+impl Tile {
+    pub fn repr(&self) -> String {
+        return self.letter.to_string();
+    }
+}
+
 #[cfg(test)]
 mod tests;
