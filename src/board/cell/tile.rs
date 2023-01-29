@@ -1,6 +1,6 @@
 use std::fmt::{self, Display};
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct Tile {
     pub letter: char,
     pub value: i32,

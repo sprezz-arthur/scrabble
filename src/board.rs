@@ -1,4 +1,6 @@
-mod cell;
+use itertools::Itertools;
+
+pub mod cell;
 
 const BOARD_SIZE: usize = 15;
 
@@ -9,10 +11,7 @@ use std::fmt::{self, Display};
 impl Display for Board {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         for row in self.0.iter() {
-            for cell in row.iter() {
-                write!(f, "{} ", cell)?;
-            }
-            writeln!(f, "")?;
+            writeln!(f, "{}", row.iter().join("|"))?;
         }
         return Ok(());
     }
@@ -20,7 +19,8 @@ impl Display for Board {
 
 impl Default for Board {
     fn default() -> Board {
-        return Board([[cell::Cell::default(); BOARD_SIZE]; BOARD_SIZE]);
+        let board = Board([[cell::Cell::default(); BOARD_SIZE]; BOARD_SIZE]);
+        return board;
     }
 }
 

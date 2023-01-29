@@ -1,6 +1,7 @@
 mod board;
 
 fn main() {
-    let board = board::Board::default();
-    println!("This is my board: \n{}", board);
+    let cell = board::cell::Cell::default();
+    println!("This is how my cell looks: {}", cell);
+    println!("This is my cell's content: {:?}", cell);
 }
