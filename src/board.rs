@@ -10,7 +10,6 @@ use std::fmt::{self, Display};
 
 impl Display for Board {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-
         write!(f, "  ")?;
         write!(f, "{}", "\x1b[58;5;30m")?;
         write!(f, "{}", "\x1b[1;4;30m")?;
@@ -19,9 +18,8 @@ impl Display for Board {
         for (i, row) in self.0.iter().enumerate() {
             if i < 10 {
                 write!(f, "{} ", i)?;
-            }
-            else {
-                write!(f, "{} ", (i as u8+ 55) as char)?;
+            } else {
+                write!(f, "{} ", (i as u8 + 55) as char)?;
             }
             writeln!(f, "{}", row.iter().join(""))?;
         }
@@ -32,14 +30,14 @@ impl Display for Board {
 impl Default for Board {
     fn default() -> Board {
         let mut board = Board([[cell::Cell::default(); BOARD_SIZE]; BOARD_SIZE]);
-        
+
         board.0[0][0] = cell::Cell::new(cell::CellType::TripleWord);
         board.0[0][3] = cell::Cell::new(cell::CellType::DoubleLetter);
         board.0[0][7] = cell::Cell::new(cell::CellType::TripleWord);
 
         board.0[1][1] = cell::Cell::new(cell::CellType::DoubleWord);
         board.0[1][5] = cell::Cell::new(cell::CellType::TripleLetter);
-        
+
         board.0[2][2] = cell::Cell::new(cell::CellType::DoubleWord);
         board.0[2][6] = cell::Cell::new(cell::CellType::DoubleLetter);
 
@@ -53,8 +51,8 @@ impl Default for Board {
         board.0[6][6] = cell::Cell::new(cell::CellType::DoubleLetter);
 
         board.0[7][7] = cell::Cell::new(cell::CellType::Star);
-    
-        for (i,  row) in board.0.into_iter().enumerate() {
+
+        for (i, row) in board.0.into_iter().enumerate() {
             for (j, cell) in row.iter().enumerate() {
                 if (j > i) {
                     board.0[j][i] = cell.clone();
@@ -62,23 +60,21 @@ impl Default for Board {
             }
         }
 
-        for (i,  row) in board.0.into_iter().enumerate() {
+        for (i, row) in board.0.into_iter().enumerate() {
             for (j, cell) in row.iter().enumerate() {
-                if i < BOARD_SIZE/2  {
+                if i < BOARD_SIZE / 2 {
                     board.0[BOARD_SIZE - i - 1][j] = cell.clone();
                 }
             }
         }
 
-        for (i,  row) in board.0.into_iter().enumerate() {
+        for (i, row) in board.0.into_iter().enumerate() {
             for (j, cell) in row.iter().enumerate() {
-                if j < BOARD_SIZE/2  {
+                if j < BOARD_SIZE / 2 {
                     board.0[i][BOARD_SIZE - j - 1] = cell.clone();
                 }
             }
         }
-
-
         return board;
     }
 }

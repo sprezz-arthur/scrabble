@@ -1,7 +1,7 @@
 use super::Board;
 
 #[test]
-fn board_is_printable() {
+fn print_board() {
     let board = Board::default();
     println!("board:\n{}", board);
 }
