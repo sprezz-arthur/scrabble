@@ -1,4 +1,6 @@
 mod board;
+mod dictionary;
+mod player;
 
 fn main() {
     let mut cell = board::cell::Cell::new(board::cell::CellType::Star);
@@ -14,7 +16,16 @@ fn main() {
     println!("This is how my cell looks: {}", cell);
     println!("This is my cell's content: {:?}", cell);
 
-
     let board = board::Board::default();
     println!("This is my board:\n{}", board);
+
+    let mut hand = player::Hand::default();
+
+    println!("hand: {}", hand);
+    println!("hand: {:?}", hand);
+
+    hand.add_tile(tile, 0);
+
+    println!("hand: {}", hand);
+    println!("hand: {:?}", hand);
 }
