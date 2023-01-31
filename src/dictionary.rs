@@ -14,7 +14,7 @@ fn lines_from_file(filename: impl AsRef<Path>) -> Vec<String> {
 
 
 pub fn in_dict(word: &str) -> bool {
-    let dict = lines_from_file("/home/arthur/projects/scrabble-rust/src/dictionary/dictionary.txt");
+    let dict = lines_from_file("./src/dictionary/dictionary.txt");
     return dict.contains(&word.to_string().to_uppercase());
 }
 
