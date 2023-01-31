@@ -21,6 +21,8 @@ fn main() {
 
     let mut hand = player::Hand::default();
 
+    println!("\0b33[2J");
+
     println!("hand: {}", hand);
     println!("hand: {:?}", hand);
 

@@ -54,7 +54,7 @@ impl Default for Board {
 
         for (i, row) in board.0.into_iter().enumerate() {
             for (j, cell) in row.iter().enumerate() {
-                if (j > i) {
+                if j > i {
                     board.0[j][i] = cell.clone();
                 }
             }
