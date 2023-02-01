@@ -3,6 +3,6 @@ use super::{Tile};
 
 #[test]
 fn print_tile() {
-    let tile = Tile::new('A', 1);
+    let tile = Tile::new('A');
     println!("tile:\n{}", tile);
 }

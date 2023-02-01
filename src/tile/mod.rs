@@ -1,16 +1,20 @@
 use std::fmt::{self, Display};
 
-mod letter;
+use letter::LETTERS;
+
+pub mod letter;
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct Tile {
     pub letter: char,
-    pub value: i32,
+    pub points: i32,
 }
 
 impl Tile {
-    pub fn new(letter: char, value: i32) -> Tile {
-        return Tile { letter, value };
+    pub fn new(letter: char) -> Tile {
+        return Tile {
+            letter, points: LETTERS[&letter].points
+         };
     }
 }
 

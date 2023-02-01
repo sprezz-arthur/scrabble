@@ -9,7 +9,7 @@ fn init_hand() {
 
 #[test]
 fn add_tile() {
-    let tile = Tile::new('B', 1);
+    let tile = Tile::new('B');
     let mut hand = Hand::default();
     println!("hand: {:?}", hand);
 
