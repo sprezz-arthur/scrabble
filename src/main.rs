@@ -1,6 +1,8 @@
+mod bag;
 mod board;
 mod dictionary;
 mod player;
+mod tile;
 
 fn main() {
     let mut cell = board::cell::Cell::new(board::cell::CellType::Star);
@@ -9,7 +11,7 @@ fn main() {
 
     println!("\nAnd after I place an `A` tile, it goes...\n");
 
-    let tile = board::cell::tile::Tile::new('A', 1);
+    let tile = tile::Tile::new('A', 1);
 
     cell.tile = Some(tile);
 
