@@ -1,4 +1,3 @@
-mod letter;
 mod bag;
 mod board;
 mod dictionary;
@@ -23,8 +22,6 @@ fn main() {
     println!("This is my board:\n{}", board);
 
     let mut hand = player::Hand::default();
-
-    println!("\0b33[2J");
 
     println!("hand: {}", hand);
     println!("hand: {:?}", hand);

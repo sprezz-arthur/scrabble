@@ -1,5 +1,7 @@
 use std::fmt::{self, Display};
 
+mod letter;
+
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct Tile {
     pub letter: char,

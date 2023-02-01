@@ -1,5 +1,4 @@
-
-const LETTER_VALUES: [(char, i32); 27] = [
+pub const LETTER_VALUES: [(char, i32); 27] = [
     ('A', 1),
     ('B', 3),
     ('C', 3),
@@ -28,7 +27,7 @@ const LETTER_VALUES: [(char, i32); 27] = [
     ('Z', 10),
     (' ', 0)];
 
-const LETTER_DISTRIBUTION: [(char, i32); 27] = [
+pub const LETTER_DISTRIBUTION: [(char, i32); 27] = [
     ('A', 9),
     ('B', 2),
     ('C', 2),
@@ -57,11 +56,5 @@ const LETTER_DISTRIBUTION: [(char, i32); 27] = [
     ('Z', 1),
     (' ', 2)];
 
-struct Letter {
-    symbol: char,
-    value: i8,
-    quantity: i8
-}
 
-#[cfg(test)]
-mod tests;
+
