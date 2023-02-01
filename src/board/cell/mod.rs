@@ -1,6 +1,6 @@
 use std::fmt::{self, Display};
 
-pub mod tile;
+use crate::tile;
 
 #[derive(Copy, Clone, Debug)]
 enum Color {

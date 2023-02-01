@@ -2,7 +2,7 @@ use std::fmt::{self, Display};
 
 use itertools::Itertools;
 
-use crate::board::cell::tile;
+use crate::tile;
 
 const HAND_SIZE: usize = 7;
 
