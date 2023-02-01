@@ -31,9 +31,19 @@ fn main() {
     println!("{}", hand);
     println!("{:?}\n", hand);
 
-    let bag = bag::Bag::default();
+    let mut bag = bag::Bag::empty();
 
 
     println!("{}", bag);
-    println!("{:?}", bag);
+    println!("{:?}\n", bag);
+
+    let tile = bag.draw_tile();
+    
+    if tile.is_none() {
+        println!("Bag is empty!");
+    }
+    else {
+        println!("drew: {:?}", tile); 
+    }
+
 }
