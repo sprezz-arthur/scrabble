@@ -1,3 +1,4 @@
+mod letter;
 mod bag;
 mod board;
 mod dictionary;
