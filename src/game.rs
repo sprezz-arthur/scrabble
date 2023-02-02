@@ -52,6 +52,7 @@ impl Debug for Game {
 
 impl Display for Game {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "\x1B[2J\x1B[1;1H")?;
         writeln!(f, "Board:\n{}\n", self.board)?;
         writeln!(f, "💰 Tiles reamining: {}\n", self.bag)?;
 
