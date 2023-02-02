@@ -11,7 +11,7 @@ use std::fmt::{self, Display};
 impl Display for Board {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "  ")?;
-        write!(f, "{}", "\x1b[4;30m")?;
+        write!(f, "{}", "\x1b[4m")?;
         writeln!(f, " 0  1  2  3  4  5  6  7  8  9  A  B  C  D  E ")?;
         write!(f, "{}", "\x1b[0m")?;
         for (i, row) in self.0.iter().enumerate() {
