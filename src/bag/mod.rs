@@ -34,9 +34,9 @@ impl Bag {
 
 
 impl Bag {
-    pub fn return_tiles(&mut self, tiles: Vec<Tile>) {
-        for tile in tiles {
-            self.tiles.push(tile);
+    pub fn return_tiles(&mut self, tiles: &mut Vec<Tile>) {
+        while tiles.len() > 0 {
+            self.tiles.push(tiles.pop().unwrap());
         }
         self.shuffle();
     }

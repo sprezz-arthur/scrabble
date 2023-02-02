@@ -38,12 +38,27 @@ fn main() {
     println!("{:?}\n", bag);
 
     let tile = bag.draw_tile();
-    
+
     if tile.is_none() {
-        println!("Bag is empty!");
+        println!("Bag is empty!\n");
     }
     else {
-        println!("drew: {:?}", tile); 
+        println!("drew: {:?}\n", tile); 
     }
+
+    let mut tiles = [
+        tile::Tile::new('A'),
+        tile::Tile::new('B'),
+        tile::Tile::new('C'),
+    ].to_vec();
+    
+    println!("Tiles are: {:?}\n", tiles);
+
+    bag.return_tiles(&mut tiles);
+
+    println!("Now bag has: {:?}\n", bag);
+
+    println!("Tiles are now: {:?}\n", tiles);
+
 
 }
