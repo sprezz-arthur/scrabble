@@ -1,4 +1,7 @@
-use std::fmt::Display;
+use std::fmt::{Debug, Display};
+
+use rand::seq::SliceRandom;
+use rand::thread_rng;
 
 use crate::bag;
 use crate::board;
@@ -7,7 +10,6 @@ use crate::game;
 use crate::player;
 use crate::tile;
 
-#[derive(Debug)]
 pub struct Game {
     pub players: Vec<player::Player>,
     pub board: board::Board,
@@ -16,8 +18,14 @@ pub struct Game {
 
 pub fn init_game(num_players: i32) -> Game {
     let mut players = Vec::new();
+
+    let icons = ['💩', '🤡', '👹', '👺', '👻', '👽', '👾', '🤖'];
+    let mut icons = icons.to_vec();
+    icons.shuffle(&mut thread_rng());
+
     for i in 0..num_players {
-        players.push(player::Player::new(i));
+        let icon = icons[i as usize];
+        players.push(player::Player::new(i, icon));
     }
 
     let board = board::Board::default();
@@ -30,13 +38,29 @@ pub fn init_game(num_players: i32) -> Game {
     };
 }
 
-impl Display for Game {
+impl Debug for Game {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         writeln!(f, "Board:\n{}\n", self.board)?;
         writeln!(f, "Bag:\n{}\n", self.bag)?;
 
         for (i, player) in self.players.iter().enumerate() {
             writeln!(f, "Player {}:\n{}", i, player)?;
+        }
+        return Ok(());
+    }
+}
+
+impl Display for Game {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        writeln!(f, "Board:\n{}\n", self.board)?;
+        writeln!(f, "💰 Tiles reamining: {}\n", self.bag)?;
+
+        for (i, player) in self.players.iter().enumerate() {
+            writeln!(
+                f,
+                "{} Player {}:\n\t{}\n\tScore:{}\n",
+                player.icon, i, player.hand, player.score
+            )?;
         }
         return Ok(());
     }

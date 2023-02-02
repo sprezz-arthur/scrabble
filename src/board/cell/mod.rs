@@ -14,11 +14,11 @@ enum Color {
 impl Color {
     pub fn hex_code(&self) -> &str {
         return match &self {
-            Color::Beige => "\x1b[48:5:228m",
-            Color::LightBlue => "\x1b[104m",
-            Color::Blue => "\x1b[48:5:19m",
-            Color::Salmon => "\x1b[101m",
-            Color::Red => "\x1b[48:5:88m",
+            Color::Beige => "\x1b[107m",
+            Color::LightBlue => "\x1b[106m",
+            Color::Blue => "\x1b[44m",
+            Color::Salmon => "\x1b[43m",
+            Color::Red => "\x1b[41m",
         };
     }
 }
@@ -46,7 +46,6 @@ pub enum CellType {
     DoubleWord,
     TripleWord,
 }
-
 
 impl CellProps {
     pub fn new(cell_type: CellType) -> CellProps {
@@ -97,7 +96,6 @@ impl CellProps {
     }
 }
 
-
 #[derive(Copy, Clone, Debug)]
 pub struct Cell {
     pub tile: Option<tile::Tile>,
@@ -107,7 +105,10 @@ pub struct Cell {
 impl Cell {
     pub fn new(cell_type: CellType) -> Cell {
         let props = CellProps::new(cell_type);
-        return Cell { tile: None, props: props };
+        return Cell {
+            tile: None,
+            props: props,
+        };
     }
 }
 
