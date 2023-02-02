@@ -4,6 +4,7 @@ pub mod cell;
 
 const BOARD_SIZE: usize = 15;
 
+#[derive(Debug)]
 pub struct Board([[cell::Cell; BOARD_SIZE]; BOARD_SIZE]);
 
 use std::fmt::{self, Display};

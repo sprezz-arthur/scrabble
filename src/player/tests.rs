@@ -1,5 +1,5 @@
-use super::tile::Tile;
-use super::Hand;
+use super::hand::Hand;
+use crate::tile::Tile;
 
 #[test]
 fn init_hand() {
@@ -11,6 +11,7 @@ fn init_hand() {
 fn add_tile() {
     let tile = Tile::new('B');
     let mut hand = Hand::default();
+
     println!("hand: {:?}", hand);
 
     assert_eq!(hand.tiles[0], None);
