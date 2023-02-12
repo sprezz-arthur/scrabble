@@ -5,10 +5,7 @@ use rand::thread_rng;
 
 use crate::bag;
 use crate::board;
-use crate::dictionary;
-use crate::game;
 use crate::player;
-use crate::tile;
 
 pub struct Game {
     pub players: Vec<player::Player>,
@@ -53,13 +50,13 @@ impl Debug for Game {
 impl Display for Game {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "\x1B[2J\x1B[1;1H")?;
-        writeln!(f, "Board:\n{}\n", self.board)?;
-        writeln!(f, "💰 Tiles reamining: {}\n", self.bag)?;
+        writeln!(f, "Board:\n\r{}\n\r", self.board)?;
+        writeln!(f, "💰 Tiles reamining: {}\n\r", self.bag)?;
 
         for (i, player) in self.players.iter().enumerate() {
             writeln!(
                 f,
-                "{} Player {}:\n\t{}\n\tScore:{}\n",
+                "{} Player {}:\n\r\t{}\n\r\tScore:{}\n\r",
                 player.icon, i, player.hand, player.score
             )?;
         }
