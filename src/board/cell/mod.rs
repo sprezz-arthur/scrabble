@@ -125,7 +125,7 @@ impl Display for Cell {
         } else {
             "▏·▕".replace("·", &self.tile.unwrap().repr())
         };
-        write!(f, "{}", "\x1b[1;4;30m")?;
+        write!(f, "{}", "\x1b[1;53;30m")?;
         write!(f, "{}", self.props.color.hex_code())?;
         write!(f, "{}", repr)?;
         write!(f, "{}", "\x1b[0m")?;
